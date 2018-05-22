@@ -24,7 +24,7 @@ class CactusObstacle {
   detectsHit(dino){
 
     if((height - dino.yPosition) < (this.yPosition+this.height)){
-      if(dino.xPosition+30 > this.xPosition && dino.xPosition+30 < this.xPosition + this.width){
+      if(dino.xPosition> this.xPosition && dino.xPosition < this.xPosition + this.width){
       return true;
       }
     }

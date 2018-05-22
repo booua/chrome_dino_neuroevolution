@@ -4,7 +4,7 @@ class Dino {
     this.xPosition = 200;
     this.gravityForce = 2;
     this.velocity = 0;
-    this.jumpHeight = 15
+    this.jumpHeight = 18
   }
 
   renderDino() {

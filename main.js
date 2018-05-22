@@ -24,7 +24,8 @@ function draw() {
     }
 
     if(obstacle.detectsHit(dino)){
-      console.log("hit detected");
+      textSize(32);
+      text('hit', 20, 30);
     }
   }
 
