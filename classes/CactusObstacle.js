@@ -1,4 +1,5 @@
 class CactusObstacle {
+  
   constructor(){
     this.xPosition = width;
     this.yPosition = height - 200;

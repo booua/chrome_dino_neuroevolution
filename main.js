@@ -12,6 +12,8 @@ function setup() {
 
 function draw() {
   background(0);
+  
+  dino.decide();
   dino.renderDino();
   dino.updateDinoPosition();
 
