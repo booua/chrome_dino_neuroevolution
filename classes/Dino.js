@@ -8,12 +8,14 @@ class Dino {
     this.xPosition = 200;
     this.gravityForce = 2;
     this.velocity = 0;
+    this.height = 60;
+    this.width = 30;
     this.jumpHeight = 18
     this.brainz = new NeuralNetwork(NNinputCount, NNoutputCount, NNnodesCount)
   }
 
   decide() {
-    let inputs = [1.0, 0.1, 0.5, 0.6];
+    let inputs = [1.0, 0.1, 0.3, 0.6];
     let output = this.brainz.predict(inputs)
     if (output > 0.5) {
       this.jump();
@@ -22,20 +24,33 @@ class Dino {
 
   renderDino() {
     fill(255);
-    rect(this.xPosition, this.yPosition, 30, 60);
+    rect(this.xPosition, this.yPosition, this.width, this.height);
   }
 
   updateDinoPosition() {
     this.velocity += this.gravityForce;
     this.yPosition += this.velocity
 
-    if (this.yPosition > (height - 200)) {
+    if (this.yPosition >= (height - 200)) {
       this.yPosition = (height - 200)
       this.velocity = 0;
     }
   }
 
+  duck() {
+    this.velocity += (this.gravityForce * this.jumpHeight);
+    this.height = this.height / 2;
+  }
+
+  standUp(){
+    this.height = 60;
+  }
+
   jump() {
     this.velocity += -(this.gravityForce * this.jumpHeight);
+    if (this.velocity != -(this.gravityForce * this.jumpHeight)) {
+      this.velocity = 0;
+    }
+
   }
 }

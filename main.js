@@ -5,27 +5,27 @@ let dino;
 let obstaclesArray = [];
 
 function setup() {
-  createCanvas(window.innerWidth, window.innerHeight*0.7);
+  createCanvas(window.innerWidth, window.innerHeight * 0.7);
   dino = new Dino();
   obstaclesArray.push(new CactusObstacle());
 }
 
 function draw() {
   background(0);
-  
+
   dino.decide();
-  dino.renderDino();
   dino.updateDinoPosition();
+  dino.renderDino();
 
   for (obstacle of obstaclesArray) {
     obstacle.renderObstacle();
     obstacle.updateObstacle();
 
-    if(obstacle.isOffScreen()){
+    if (obstacle.isOffScreen()) {
       obstaclesArray.shift()
     }
 
-    if(obstacle.detectsHit(dino)){
+    if (obstacle.detectsHit(dino)) {
       textSize(32);
       text('hit', 20, 30);
     }
@@ -34,16 +34,26 @@ function draw() {
   this.addAndRemoveObstacleToFrame();
 }
 
-function addAndRemoveObstacleToFrame(){
-// TODO: randomize obstacle occurances
-  if(frameCount % 100 == 0){
+function addAndRemoveObstacleToFrame() {
+  // TODO: randomize obstacle occurances
+  if (frameCount % 100 == 0) {
     let cactus = new CactusObstacle()
     obstaclesArray.push(cactus);
   }
 }
 
 function keyPressed() {
-  if (key == ' ') {
+
+  if (key == ' ' || keyCode == UP_ARROW) {
     dino.jump();
+  }
+  if (keyCode == DOWN_ARROW) {
+    dino.duck();
+  }
+
+}
+function keyReleased() {
+  if (keyCode == DOWN_ARROW) {
+    dino.standUp();
   }
 }
