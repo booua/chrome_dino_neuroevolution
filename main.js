@@ -1,6 +1,5 @@
 // TODO: speeding up the game as time passes
 // TODO: add spritesheets
-//
 
 let dino;
 let obstaclesArray = [];
@@ -17,7 +16,6 @@ function draw() {
   dino.updateDinoPosition();
 
   for (obstacle of obstaclesArray) {
-    // console.log(obstacle);
     obstacle.renderObstacle();
     obstacle.updateObstacle();
 
@@ -34,18 +32,15 @@ function draw() {
 }
 
 function addAndRemoveObstacleToFrame(){
-
+// TODO: randomize obstacle occurances
   if(frameCount % 100 == 0){
-
     let cactus = new CactusObstacle()
     obstaclesArray.push(cactus);
-
   }
 }
 
 function keyPressed() {
   if (key == ' ') {
-    // console.log("spacePressed");
     dino.jump();
   }
 }
