@@ -1,5 +1,6 @@
-var dino;
-var obstaclesArray = [];
+let dino;
+let obstaclesArray = [];
+
 function setup() {
   createCanvas(window.innerWidth, window.innerHeight);
   dino = new Dino();
@@ -12,15 +13,24 @@ function draw() {
   dino.updateDinoPosition();
 
   for (obstacle of obstaclesArray) {
-    console.log(obstacle);
+    // console.log(obstacle);
     obstacle.renderObstacle();
     obstacle.updateObstacle();
+
+    if(obstacle.isOffScreen()){
+      obstaclesArray.shift()
+    }
+
+    if(obstacle.detectsHit(dino)){
+      console.log("hit detected");
+    }
   }
-  
-  this.addObstacleToFrame();
+
+  this.addAndRemoveObstacleToFrame();
 }
 
-function addObstacleToFrame(){
+function addAndRemoveObstacleToFrame(){
+
   if(frameCount % 100 == 0){
     obstaclesArray.push(new CactusObstacle());
   }
@@ -28,7 +38,7 @@ function addObstacleToFrame(){
 
 function keyPressed() {
   if (key == ' ') {
-    console.log("spacePressed");
+    // console.log("spacePressed");
     dino.jump();
   }
 }

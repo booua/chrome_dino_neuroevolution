@@ -1,13 +1,13 @@
 function Dino() {
   this.yPosition = height - 200;
   this.xPosition = 200;
-  this.gravityForce = 5;
+  this.gravityForce = 2;
   this.velocity = 0;
-  this.jumpHeight = 10
+  this.jumpHeight = 15
 
   this.renderDino = function() {
     fill(255);
-    ellipse(this.xPosition, this.yPosition, 50, 50);
+    ellipse(this.xPosition, this.yPosition, 70, 70);
   }
 
   this.updateDinoPosition = function() {
