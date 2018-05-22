@@ -1,15 +1,18 @@
 // TODO: speeding up the game as time passes
 // TODO: add spritesheets
-// TODO: fix ducking
-// TODO: randomize obstacle occurances
 
-let dino;
+const POPULATION = 200;
+let dinos = [];
 let obstaclesArray = [];
 let gameSpeed = 5
 
+
 function setup() {
   createCanvas(window.innerWidth, window.innerHeight * 0.7);
-  dino = new Dino();
+  for(let i = 0; i<POPULATION; i++){
+    dinos[i] = new Dino();
+  }
+
   obstaclesArray.push(new CactusObstacle(gameSpeed));
 }
 
@@ -18,9 +21,11 @@ function draw() {
   stroke(255)
   line(0, height - 200, width, height - 200);
 
-  dino.decide();
-  dino.updateDinoPosition();
-  dino.renderDino();
+  for(dino of dinos){
+    dino.decide(obstaclesArray);
+    dino.updateDinoPosition();
+    dino.renderDino();
+  }
 
   for (obstacle of obstaclesArray) {
     obstacle.renderObstacle();
@@ -35,8 +40,9 @@ function draw() {
       text('hit', 20, 30);
     }
   }
-  if (frameCount % 100 === 0) {
 
+  if (frameCount % 100 === 0) {
+    gameSpeed += 0.2
   }
 
   if(frameCount % 50 === 0 && random(0,1) > 0.3){

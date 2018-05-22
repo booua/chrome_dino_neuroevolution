@@ -1,4 +1,4 @@
-const NNinputCount = 4
+const NNinputCount = 3
 const NNoutputCount = 1
 const NNnodesCount = 4
 
@@ -14,16 +14,33 @@ class Dino {
     this.brainz = new NeuralNetwork(NNinputCount, NNoutputCount, NNnodesCount)
   }
 
-  decide() {
-    let inputs = [1.0, 0.1, 0.3, 0.6];
-    let output = this.brainz.predict(inputs)
-    if (output > 0.5) {
+  decide(obstacles) {
+
+    let nearestObstacle = null;
+    let nearestDistance = Infinity;
+
+      for (var cactus of obstacles) {
+        let distance = cactus.xPosition - this.xPosition;
+        if(distance < nearestDistance && distance > 0){
+          nearestObstacle = cactus;
+          nearestDistance = distance
+        }
+      }
+
+    let inputs = [];
+    inputs[0] = this.yPosition / height;
+    inputs[1] = nearestObstacle.height / height;
+    inputs[2] = nearestObstacle.xPosition / height;
+
+    let output = this.brainz.predict(inputs);
+    // console.log(output);
+    if (output[0] > 0.5) {
       this.jump();
     }
   }
 
   renderDino() {
-    fill(255);
+    fill(255,50);
     rect(this.xPosition, this.yPosition, this.width, this.height);
   }
 
