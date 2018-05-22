@@ -5,12 +5,12 @@
 
 let dino;
 let obstaclesArray = [];
-
+let gameSpeed = 5
 
 function setup() {
   createCanvas(window.innerWidth, window.innerHeight * 0.7);
   dino = new Dino();
-  obstaclesArray.push(new CactusObstacle());
+  obstaclesArray.push(new CactusObstacle(gameSpeed));
 }
 
 function draw() {
@@ -35,15 +35,21 @@ function draw() {
       text('hit', 20, 30);
     }
   }
+  if (frameCount % 100 === 0) {
 
-  this.addAndRemoveObstacleToFrame();
+  }
+
+  if(frameCount % 50 === 0 && random(0,1) > 0.3){
+    this.addObstacle();
+  }
+
 }
 
-function addAndRemoveObstacleToFrame() {
-  if (frameCount % 100 == 0) {
-    let cactus = new CactusObstacle()
+function addObstacle() {
+
+    let cactus = new CactusObstacle(gameSpeed)
     obstaclesArray.push(cactus);
-  }
+
 }
 
 function keyPressed() {
