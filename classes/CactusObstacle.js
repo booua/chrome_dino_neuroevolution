@@ -1,11 +1,12 @@
 class CactusObstacle {
-  
+
   constructor(){
     this.xPosition = width;
-    this.yPosition = height - 200;
+    this.height = 50
+    this.yPosition = height - 200 - this.height;
     this.width = Math.floor((Math.random() * 50) + 10);
     this.gameSpeed = 5;
-    this.height = 50
+
   }
 
 

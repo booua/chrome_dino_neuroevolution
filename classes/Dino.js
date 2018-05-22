@@ -4,11 +4,11 @@ const NNnodesCount = 4
 
 class Dino {
   constructor() {
-    this.yPosition = height - 200;
+    this.height = 60;
     this.xPosition = 200;
+    this.yPosition = height - 200 - this.height;
     this.gravityForce = 2;
     this.velocity = 0;
-    this.height = 60;
     this.width = 30;
     this.jumpHeight = 18
     this.brainz = new NeuralNetwork(NNinputCount, NNoutputCount, NNnodesCount)
@@ -31,8 +31,8 @@ class Dino {
     this.velocity += this.gravityForce;
     this.yPosition += this.velocity
 
-    if (this.yPosition >= (height - 200)) {
-      this.yPosition = (height - 200)
+    if (this.yPosition >= (height - 200 - this.height)) {
+      this.yPosition = (height - 200 - this.height);
       this.velocity = 0;
     }
   }
@@ -40,9 +40,10 @@ class Dino {
   duck() {
     this.velocity += (this.gravityForce * this.jumpHeight);
     this.height = this.height / 2;
+
   }
 
-  standUp(){
+  standUp() {
     this.height = 60;
   }
 
