@@ -1,8 +1,12 @@
+// TODO: speeding up the game as time passes
+// TODO: add spritesheets
+//
+
 let dino;
 let obstaclesArray = [];
 
 function setup() {
-  createCanvas(window.innerWidth, window.innerHeight);
+  createCanvas(window.innerWidth, window.innerHeight*0.7);
   dino = new Dino();
   obstaclesArray.push(new CactusObstacle());
 }
@@ -32,7 +36,10 @@ function draw() {
 function addAndRemoveObstacleToFrame(){
 
   if(frameCount % 100 == 0){
-    obstaclesArray.push(new CactusObstacle());
+
+    let cactus = new CactusObstacle()
+    obstaclesArray.push(cactus);
+
   }
 }
 

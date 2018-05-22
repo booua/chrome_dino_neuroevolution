@@ -7,7 +7,7 @@ function Dino() {
 
   this.renderDino = function() {
     fill(255);
-    ellipse(this.xPosition, this.yPosition, 70, 70);
+    rect(this.xPosition, this.yPosition, 30, 60);
   }
 
   this.updateDinoPosition = function() {

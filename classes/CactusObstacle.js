@@ -1,13 +1,14 @@
 function CactusObstacle() {
 
   this.xPosition = width;
-  this.width = random(height / 30);
+  this.yPosition = height - 200;
+  this.width = Math.floor((Math.random() * 50) + 10);
   this.gameSpeed = 5;
   this.height = 50
 
   this.renderObstacle = function() {
     fill(255);
-    rect(this.xPosition, 575, this.width, this.height)
+    rect(this.xPosition, this.yPosition, this.width, this.height)
   }
 
   this.updateObstacle = function() {
@@ -19,10 +20,12 @@ function CactusObstacle() {
   }
 
   this.detectsHit = function(dino){
-    if(dino.yPosition > height - this.height){
-      if(dino.xPosition > this.xPosition && dino.xPosition < this.xPosition + this.width){
+
+    if((height - dino.yPosition) < (this.yPosition+this.height)){
+      if(dino.xPosition+30 > this.xPosition && dino.xPosition+30 < this.xPosition + this.width){
       return true;
       }
     }
   }
+
 }
