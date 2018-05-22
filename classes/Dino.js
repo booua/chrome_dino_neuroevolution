@@ -1,16 +1,18 @@
-function Dino() {
-  this.yPosition = height - 200;
-  this.xPosition = 200;
-  this.gravityForce = 2;
-  this.velocity = 0;
-  this.jumpHeight = 15
+class Dino() {
+  constructor(){
+    this.yPosition = height - 200;
+    this.xPosition = 200;
+    this.gravityForce = 2;
+    this.velocity = 0;
+    this.jumpHeight = 15
+  }
 
-  this.renderDino = function() {
+  renderDino() {
     fill(255);
     rect(this.xPosition, this.yPosition, 30, 60);
   }
 
-  this.updateDinoPosition = function() {
+  updateDinoPosition() {
     this.velocity += this.gravityForce;
     this.yPosition += this.velocity
 
@@ -20,7 +22,7 @@ function Dino() {
     }
   }
 
-  this.jump = function() {
+  jump() {
     this.velocity += -(this.gravityForce * this.jumpHeight);
   }
 }
