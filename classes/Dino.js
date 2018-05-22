@@ -1,4 +1,4 @@
-class Dino() {
+class Dino {
   constructor(){
     this.yPosition = height - 200;
     this.xPosition = 200;
