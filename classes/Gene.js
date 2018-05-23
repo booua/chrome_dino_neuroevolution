@@ -1,29 +1,39 @@
-
-function nextGeneration(){
+function nextGeneration() {
 
   calculateFitnessScore();
 
-  for(let i = 0; i<POPULATION; i++){
-    dinos[i] = pickOneDino()//new Dino();
+  for (let i = 0; i < POPULATION; i++) {
+    dinos[i] = pickOneDino();
   }
   deadDinosArray = [];
 }
 
-function pickOneDino(){
-  let newGenDino = random(deadDinosArray)
-  let childDino = new Dino(newGenDino.brainz)
-  childDino.mutate()
+function pickOneDino() {
+  let index = 0;
+  let randomNumber = random(1);
+
+
+  while (randomNumber > 0) {
+    randomNumber = randomNumber - deadDinosArray[index].fitnessScore;
+    index++;
+
+  }
+  index--;
+
+  let newGenDino = deadDinosArray[index];
+  let childDino = new Dino(newGenDino.brainz);
+  childDino.mutate();
   return childDino;
 }
 
-function calculateFitnessScore(){
- let totalLifeScore = 0;
+function calculateFitnessScore() {
+  let totalLifeScore = 0;
 
- for (let dino in dinos){
+  for (let dino of deadDinosArray) {
     totalLifeScore += dino.lifeScore
- }
- for (let dino in dinos){
-     dino.fitnessScore = dino.lifeScore / totalLifeScore;
- }
+  }
+  for (let dino of deadDinosArray) {
+    dino.fitnessScore = dino.lifeScore / totalLifeScore;
+  }
 
 }

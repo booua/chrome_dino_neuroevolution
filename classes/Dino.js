@@ -23,7 +23,6 @@ class Dino {
   }
 
   decide(obstacles) {
-// TODO: fix that mutherfkin' null object thing somehow
     let nearestObstacle = null;
     let nearestDistance = Infinity;
 
@@ -41,7 +40,6 @@ class Dino {
     inputs[2] = nearestObstacle.xPosition / height;
 
     let output = this.brainz.predict(inputs);
-    // console.log(output);
     if (output[0] > 0.5) {
       this.jump();
     }
