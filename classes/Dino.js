@@ -1,9 +1,10 @@
 const NNinputCount = 3
 const NNoutputCount = 1
 const NNnodesCount = 4
+const MUTATE_RATE = 0.03;
 
 class Dino {
-  constructor() {
+  constructor(brainz) {
     this.height = 60;
     this.xPosition = 200;
     this.yPosition = height - 200 - this.height;
@@ -11,21 +12,28 @@ class Dino {
     this.velocity = 0;
     this.width = 30;
     this.jumpHeight = 18
-    this.brainz = new NeuralNetwork(NNinputCount, NNoutputCount, NNnodesCount)
+    this.lifeScore = 0;
+    this.fitnessScore = 0;
+    if (brainz) {
+      this.brainz = brainz.copy();
+    } else {
+      this.brainz = new NeuralNetwork(NNinputCount, NNoutputCount, NNnodesCount)
+    }
+
   }
 
   decide(obstacles) {
-
+// TODO: fix that mutherfkin' null object thing somehow
     let nearestObstacle = null;
     let nearestDistance = Infinity;
 
-      for (var cactus of obstacles) {
-        let distance = cactus.xPosition - this.xPosition;
-        if(distance < nearestDistance && distance > 0){
-          nearestObstacle = cactus;
-          nearestDistance = distance
-        }
+    for (var cactus of obstacles) {
+      let distance = cactus.xPosition - this.xPosition;
+      if (distance < nearestDistance && distance > 0) {
+        nearestObstacle = cactus;
+        nearestDistance = distance
       }
+    }
 
     let inputs = [];
     inputs[0] = this.yPosition / height;
@@ -38,13 +46,16 @@ class Dino {
       this.jump();
     }
   }
-
+  mutate(){
+    this.brainz.mutate(MUTATE_RATE);
+  }
   renderDino() {
-    fill(255,50);
+    fill(255, 50);
     rect(this.xPosition, this.yPosition, this.width, this.height);
   }
 
   updateDinoPosition() {
+    this.lifeScore++;
     this.velocity += this.gravityForce;
     this.yPosition += this.velocity
 

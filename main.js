@@ -1,10 +1,11 @@
-// TODO: speeding up the game as time passes
 // TODO: add spritesheets
 
 const POPULATION = 200;
 let dinos = [];
 let obstaclesArray = [];
+let deadDinosArray = [];
 let gameSpeed = 5
+let gameCounter = 0;
 
 
 function setup() {
@@ -27,13 +28,21 @@ function draw() {
     dino.renderDino();
   }
 
+  if(dinos.length === 0){
+    gameCounter = 0;
+    nextGeneration()
+    obstaclesArray = []
+    obstaclesArray.push(new CactusObstacle(gameSpeed));
+
+  }
+
   for (obstacle of obstaclesArray) {
     obstacle.renderObstacle();
     obstacle.updateObstacle();
 
     for(let i = dinos.length-1; i>=0;i--){
       if (obstacle.detectsHit(dinos[i])) {
-        dinos.splice(i,1);
+        deadDinosArray.push(dinos.splice(i,1)[0]);
         textSize(32);
         text('hit', 20, 30);
       }
@@ -41,8 +50,6 @@ function draw() {
     if (obstacle.isOffScreen()) {
       obstaclesArray.shift()
     }
-
-
   }
 
   if (frameCount % 100 === 0) {
@@ -53,6 +60,7 @@ function draw() {
     this.addObstacle();
   }
 
+  gameCounter++;
 }
 
 function addObstacle() {
