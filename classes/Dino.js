@@ -14,6 +14,7 @@ class Dino {
     this.jumpHeight = 18
     this.lifeScore = 0;
     this.fitnessScore = 0;
+
     if (brainz) {
       this.brainz = brainz.copy();
     } else {

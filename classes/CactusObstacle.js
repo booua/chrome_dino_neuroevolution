@@ -18,7 +18,7 @@ class CactusObstacle {
   }
 
   isOffScreen() {
-    return this.xPosition < -this.width
+      return (this.xPosition < -this.width);
   }
 
   detectsHit(dino) {

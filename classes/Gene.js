@@ -1,11 +1,15 @@
 function nextGeneration() {
-
   calculateFitnessScore();
 
   for (let i = 0; i < POPULATION; i++) {
     dinos[i] = pickOneDino();
   }
   deadDinosArray = [];
+  generationCount++;
+  if(currentScore > bestScore){
+    bestScore = currentScore
+  }
+  currentScore = 0;
 }
 
 function pickOneDino() {

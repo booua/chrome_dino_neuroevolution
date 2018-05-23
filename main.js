@@ -7,6 +7,9 @@ let deadDinosArray = [];
 let gameSpeed = 5
 let gameCounter = 0;
 let gameCycles = 1;
+let generationCount = 0;
+let bestScore = 0;
+let currentScore = 0;
 
 function setup() {
   createCanvas(window.innerWidth, window.innerHeight * 0.7);
@@ -22,9 +25,14 @@ function draw() {
   background(0);
   stroke(255)
   line(0, height - 200, width, height - 200);
+  textSize(32);
+  text('generationCount: ' + generationCount, 20, 400);
+  text('currentScore: ' + currentScore, 20, 440);
+  text('bestScore: ' + bestScore, 20, 480);
 
   for (dino of dinos) {
     dino.renderDino();
+
   }
 
   for (obstacle of obstaclesArray) {
@@ -32,8 +40,9 @@ function draw() {
   }
 
   for (let i = 0; i < gameCycles; i++) {
-
+    currentScore++;
     for (dino of dinos) {
+
       dino.decide(obstaclesArray);
       dino.updateDinoPosition();
     }
@@ -46,19 +55,22 @@ function draw() {
 
     }
 
-    for (obstacle of obstaclesArray) {
+    for (let j = obstaclesArray.length - 1; j >= 0; j--) {
 
-      obstacle.updateObstacle();
+      obstaclesArray[j].updateObstacle();
 
       for (let i = dinos.length - 1; i >= 0; i--) {
-        if (obstacle.detectsHit(dinos[i])) {
-          deadDinosArray.push(dinos.splice(i, 1)[0]);
-          textSize(32);
-          text('hit', 20, 30);
-          gameSpeed = 5;
-        }
-        if (obstacle.isOffScreen()) {
-          obstaclesArray.splice(i,1);
+        if (obstaclesArray[j] != undefined) {
+          if (obstaclesArray[j].detectsHit(dinos[i])) {
+            deadDinosArray.push(dinos.splice(i, 1)[0]);
+            textSize(32);
+            text('hit', 20, 30);
+            gameSpeed = 5;
+          }
+
+          if (obstaclesArray[j].isOffScreen()) {
+            obstaclesArray.splice(j, 1);
+          }
         }
       }
 
