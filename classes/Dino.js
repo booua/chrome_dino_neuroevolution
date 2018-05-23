@@ -33,11 +33,18 @@ class Dino {
         nearestDistance = distance
       }
     }
-
     let inputs = [];
-    inputs[0] = this.yPosition / height;
-    inputs[1] = nearestObstacle.height / height;
-    inputs[2] = nearestObstacle.xPosition / height;
+
+    if(nearestObstacle==null){
+      inputs[0] = this.yPosition / height;
+      inputs[1] = 0;
+      inputs[2] = 0;
+    }else{
+        inputs[0] = this.yPosition / height;
+        inputs[1] = nearestObstacle.height / height;
+        inputs[2] = nearestObstacle.xPosition / height;
+    }
+
 
     let output = this.brainz.predict(inputs);
     if (output[0] > 0.5) {

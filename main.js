@@ -55,11 +55,13 @@ function draw() {
           deadDinosArray.push(dinos.splice(i, 1)[0]);
           textSize(32);
           text('hit', 20, 30);
+          gameSpeed = 5;
+        }
+        if (obstacle.isOffScreen()) {
+          obstaclesArray.splice(i,1);
         }
       }
-      if (obstacle.isOffScreen()) {
-        obstaclesArray.shift()
-      }
+
     }
 
     if (frameCount % 100 === 0) {
