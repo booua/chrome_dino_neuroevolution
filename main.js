@@ -31,14 +31,18 @@ function draw() {
     obstacle.renderObstacle();
     obstacle.updateObstacle();
 
+    for(let i = dinos.length-1; i>=0;i--){
+      if (obstacle.detectsHit(dinos[i])) {
+        dinos.splice(i,1);
+        textSize(32);
+        text('hit', 20, 30);
+      }
+    }
     if (obstacle.isOffScreen()) {
       obstaclesArray.shift()
     }
 
-    if (obstacle.detectsHit(dino)) {
-      textSize(32);
-      text('hit', 20, 30);
-    }
+
   }
 
   if (frameCount % 100 === 0) {
