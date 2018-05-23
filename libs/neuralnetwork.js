@@ -7,16 +7,9 @@ class ActivationFunction {
   }
 }
 
-let sigmoid = new ActivationFunction(
-  x => 1 / (1 + Math.exp(-x)),
-  y => y * (1 - y)
-);
+let sigmoid = new ActivationFunction(x => 1 / (1 + Math.exp(-x)), y => y * (1 - y));
 
-let tanh = new ActivationFunction(
-  x => Math.tanh(x),
-  y => 1 - (y * y)
-);
-
+let tanh = new ActivationFunction(x => Math.tanh(x), y => 1 - (y * y));
 
 class NeuralNetwork {
   // TODO: document what a, b, c are
@@ -50,7 +43,6 @@ class NeuralNetwork {
     // TODO: copy these as well
     this.setLearningRate();
     this.setActivationFunction();
-
 
   }
 
@@ -106,7 +98,6 @@ class NeuralNetwork {
     gradients.multiply(output_errors);
     gradients.multiply(this.learning_rate);
 
-
     // Calculate deltas
     let hidden_T = Matrix.transpose(hidden);
     let weight_ho_deltas = Matrix.multiply(gradients, hidden_T);
@@ -155,20 +146,24 @@ class NeuralNetwork {
     return nn;
   }
 
-
   // Adding function for neuro-evolution
   copy() {
     return new NeuralNetwork(this);
   }
 
   // Accept an arbitrary function for mutation
-  mutate(func) {
-    this.weights_ih.map(func);
-    this.weights_ho.map(func);
-    this.bias_h.map(func);
-    this.bias_o.map(func);
+  mutate(rate) {
+    function mutate(mutateValue) {
+      if (Math.random() < rate) {
+        return (2 * Math.random() - 1);
+      } else {
+        return mutateValue;
+      }
+    }
+    this.weights_ih.map(mutate);
+    this.weights_ho.map(mutate);
+    this.bias_h.map(mutate);
+    this.bias_o.map(mutate);
   }
-
-
 
 }
