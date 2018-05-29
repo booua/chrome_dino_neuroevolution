@@ -9,7 +9,7 @@ class CactusObstacle {
   }
 
   renderObstacle() {
-    fill(255);
+    fill(0);
     rect(this.xPosition, this.yPosition, this.width, this.height)
   }
 

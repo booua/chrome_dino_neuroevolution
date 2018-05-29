@@ -1,5 +1,3 @@
-// TODO: add spritesheets
-
 const POPULATION = 200;
 let dinos = [];
 let obstaclesArray = [];
@@ -22,8 +20,8 @@ function setup() {
 
 function draw() {
 
-  background(0);
-  stroke(255)
+  background(255);
+  stroke(0)
   line(0, height - 200, width, height - 200);
   textSize(32);
   text('generationCount: ' + generationCount, 20, 400);

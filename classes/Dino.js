@@ -56,7 +56,7 @@ class Dino {
     this.brainz.mutate(MUTATE_RATE);
   }
   renderDino() {
-    fill(255, 50);
+    fill(0, 50);
     rect(this.xPosition, this.yPosition, this.width, this.height);
   }
 
